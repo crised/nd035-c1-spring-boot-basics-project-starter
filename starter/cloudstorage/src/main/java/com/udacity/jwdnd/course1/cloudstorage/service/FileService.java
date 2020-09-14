@@ -42,7 +42,14 @@ public class FileService {
         return fileMapper.getFilesFromUser(userId);
     }
 
-    public File getFileByFileId(Integer fileId){
+    public File getFileByFileId(Integer fileId) {
         return fileMapper.getFile(fileId);
     }
+
+    public boolean deleteFileByFileId(Integer fileId) {
+        if (fileMapper.deleteFile(fileId) == 1) return true;
+        System.out.println("Ouch!");
+        return false;
+    }
+
 }
