@@ -29,14 +29,23 @@ public class HomeController {
         return "home";
     }
 
+    @PostMapping()
+    public String controlFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload,
+                                    Authentication authentication,
+                                    Model model) {
+        model.addAttribute("error", null); //reset the error
+        if (!fileService.handleFileUpload(fileUpload, authentication.getName()))
+            model.addAttribute("error", "Couldn't upload the file, maybe it's duplicated?");
+        model.addAttribute("files", allFilesFromUser(authentication));
+        return "home";
+    }
 
 
     @ModelAttribute("files")
-    public List<File> allUserFiles(Authentication authentication) {
+    public List<File> allFilesFromUser(Authentication authentication) {
         User user = userService.getUser(authentication.getName());
         return fileService.listFilesByUserId(Integer.valueOf(user.getUserid()));
     }
-
 
 
 }

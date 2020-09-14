@@ -20,21 +20,20 @@ public class FileService {
     }
 
     public boolean handleFileUpload(MultipartFile fileUpload, String username) {
+        String filename = fileUpload.getOriginalFilename();
+        if (fileMapper.getFileByName(filename) != null) return false;
         Integer userId = userService.getUserIdByUserName(username);
         if (userId < 0) return false;
         byte[] fileArray;
         try {
             fileArray = fileUpload.getBytes();
-            System.out.println(fileUpload.getOriginalFilename());
         } catch (IOException e) {
             System.out.println("Couldn't upload file");
             return false;
         }
-        File file = new File(fileUpload.getOriginalFilename(), fileUpload.getContentType(),
+        File file = new File(filename, fileUpload.getContentType(),
                 String.valueOf(fileArray.length), userId, fileArray);
         fileMapper.addFile(file);
-//        System.out.println("Upload file!: " + fileUpload.getSize());
-//        System.out.println(fileMapper.getFilesFromUser(userId));
         return true;
     }
 

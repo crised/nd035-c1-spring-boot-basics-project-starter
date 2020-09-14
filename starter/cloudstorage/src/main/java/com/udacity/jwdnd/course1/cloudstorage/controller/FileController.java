@@ -57,14 +57,7 @@ public class FileController {
         return "redirect:/home";
     }
 
-    @PostMapping()
-    public String controlFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload,
-                                    Authentication authentication,
-                                    Model model) {
-        fileService.handleFileUpload(fileUpload, authentication.getName());
-//        model.addAttribute("files", allUserFiles(authentication));
-        return "redirect:/home";
-    }
+
 
 
 }
