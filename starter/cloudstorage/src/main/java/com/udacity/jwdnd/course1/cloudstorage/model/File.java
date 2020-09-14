@@ -17,10 +17,6 @@ public class File {
         this.filedata = filedata;
     }
 
-    public File() {
-        // TODO: Delete this constructor
-    }
-
     public Integer getFileId() {
         return fileId;
     }

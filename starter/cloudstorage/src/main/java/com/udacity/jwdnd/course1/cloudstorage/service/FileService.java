@@ -30,7 +30,7 @@ public class FileService {
             System.out.println("Couldn't upload file");
             return false;
         }
-        File file = new File(fileUpload.getName(), fileUpload.getContentType(),
+        File file = new File(fileUpload.getOriginalFilename(), fileUpload.getContentType(),
                 String.valueOf(fileArray.length), userId, fileArray);
         fileMapper.addFile(file);
 //        System.out.println("Upload file!: " + fileUpload.getSize());

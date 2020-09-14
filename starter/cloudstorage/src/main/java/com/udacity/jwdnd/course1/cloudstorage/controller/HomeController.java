@@ -7,9 +7,8 @@ import com.udacity.jwdnd.course1.cloudstorage.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -30,10 +29,14 @@ public class HomeController {
         return "home";
     }
 
+
+
     @ModelAttribute("files")
     public List<File> allUserFiles(Authentication authentication) {
         User user = userService.getUser(authentication.getName());
         return fileService.listFilesByUserId(Integer.valueOf(user.getUserid()));
     }
+
+
 
 }

@@ -54,8 +54,7 @@ public class FileController {
     public String delete(@RequestParam("fileId") String fileId) {
         //http://localhost:8080/file/delete?fileId=1
         fileService.deleteFileByFileId(Integer.valueOf(fileId));
-
-        return "home";
+        return "redirect:/home";
     }
 
     @PostMapping()
@@ -63,6 +62,9 @@ public class FileController {
                                     Authentication authentication,
                                     Model model) {
         fileService.handleFileUpload(fileUpload, authentication.getName());
-        return "home";
+//        model.addAttribute("files", allUserFiles(authentication));
+        return "redirect:/home";
     }
+
+
 }
