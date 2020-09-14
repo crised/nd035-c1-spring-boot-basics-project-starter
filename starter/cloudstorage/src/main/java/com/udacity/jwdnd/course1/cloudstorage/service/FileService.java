@@ -33,12 +33,16 @@ public class FileService {
         File file = new File(fileUpload.getName(), fileUpload.getContentType(),
                 String.valueOf(fileArray.length), userId, fileArray);
         fileMapper.addFile(file);
-        System.out.println("Upload file!: " + fileUpload.getSize());
-        System.out.println(fileMapper.getAllFiles());
+//        System.out.println("Upload file!: " + fileUpload.getSize());
+//        System.out.println(fileMapper.getFilesFromUser(userId));
         return true;
     }
 
-    public List<File> listFiles() {
-        return fileMapper.getAllFiles();
+    public List<File> listFilesByUserId(Integer userId) {
+        return fileMapper.getFilesFromUser(userId);
+    }
+
+    public File getFileByFileId(Integer fileId){
+        return fileMapper.getFile(fileId);
     }
 }

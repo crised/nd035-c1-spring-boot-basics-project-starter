@@ -41,3 +41,6 @@ CREATE TABLE IF NOT EXISTS CREDENTIALS (
 
 INSERT INTO USERS (username, salt, password, firstname, lastname)
 VALUES('crised','7CemDn6zw2J1sQ7kUX1piQ==', 'n97FCJAX2rWyq51+3oeANA==', 'cristian', 'edwards');
+
+INSERT INTO FILES (filename, contenttype, filesize, userid, filedata)
+VALUES ('cat.txt', 'txt', '2', 1, '1122');
