@@ -1,5 +1,7 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
+import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,24 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 @Controller
 @RequestMapping("/file-upload")
 public class FileController {
 
+    private FileService fileService;
+
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
     @PostMapping()
-    public String handleFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload,
+    public String controlFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload,
+                                    Authentication authentication,
                                     Model model) {
-        try {
-            InputStream fis = fileUpload.getInputStream();
-            byte[] file = fis.readAllBytes();
-            System.out.println(fileUpload.getOriginalFilename());
-        } catch (IOException e) {
-            System.out.println("Couldn't upload file");
-        }
-        System.out.println("Upload file!: " + fileUpload.getSize());
+        fileService.handleFileUpload(fileUpload, authentication.getName());
         return "home";
     }
 
