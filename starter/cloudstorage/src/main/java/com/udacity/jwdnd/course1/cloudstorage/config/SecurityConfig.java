@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//TODO Change services package to service.
+
     private AuthenticationService authenticationService;
 
     public SecurityConfig(AuthenticationService authenticationService) {

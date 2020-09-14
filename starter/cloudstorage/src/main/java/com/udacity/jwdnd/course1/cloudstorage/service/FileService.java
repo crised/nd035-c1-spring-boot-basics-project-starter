@@ -32,8 +32,9 @@ public class FileService {
         }
         File file = new File(fileUpload.getName(), fileUpload.getContentType(),
                 String.valueOf(fileArray.length), userId, fileArray);
-        fileMapper
+        fileMapper.addFile(file);
         System.out.println("Upload file!: " + fileUpload.getSize());
+        System.out.println(fileMapper.getAllFiles());
         return true;
     }
 
