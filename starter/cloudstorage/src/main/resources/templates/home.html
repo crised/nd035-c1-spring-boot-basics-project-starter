@@ -80,8 +80,20 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="note: ${notes}">
+<!--                                        <span th:text="|Welcome to our application, ${note.notetitle}!|">-->
+<!--                                        <span th:object=${note} th:text="|showNoteModal(*{noteid}, '*{notetitle}', '*{notedescription}')|">-->
+
                                         <td>
-                                            <button type="button" class="btn btn-success">Edit</button>
+                                            <!--onclick="showNoteModal()"-->
+                                            <!--th:onclick="'loadContent(\''+ ${data.path} +'\')'"-->
+
+<!--                                            <button type="button" class="btn btn-success" th:object="${note}" th:onclick="'showNoteModal(\''+ *{noteid} + '\' + \'' + *{noteid} + '\')'">Edit</button>-->
+<!--                                            <button type="button" class="btn btn-success" th:object="${note}" th:onclick="'showNoteModal(\''+ *{noteid} + '\' + \'' + *{noteid} + '\')'">Edit</button>-->
+                                            <button type="button" class="btn btn-success" th:object="${note}" th:onclick="|showNoteModal(*{noteid}, '*{noteid}', '*{noteid}')|">Edit</button>
+<!--                                            <button type="button" class="btn btn-success" th:onclick="|showNoteModal('1, 2, 3')|">Edit</button>-->
+<!--
+                                            <button type="button" class="btn btn-success" th:onclick="|showNoteModal(${note.noteid} + ${note.notetitle})|">Edit</button>-->
+                                            <!--th:onclick="'javascript:dataSearchAjax1(\'' + ${result.getString('type')} +'\',\''+ ${result.getString('name')} + '\');'"-->
                                             <a class="btn btn-danger">Delete</a>
                                         </td>
                                         <th th:text="${note.notetitle}" scope="row">Example Note Title</th>
@@ -101,9 +113,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <!--  -->
                                         <form th:object="${noteForm}" action="#" th:action="@{/note}" method="POST">
-                                            <input type="hidden" name="noteId" id="note-id">
+                                            <input type="hidden" name="noteId" id="note-id" th:field="*{noteid}">
                                             <div class="form-group">
                                                 <label for="note-title" class="col-form-label">Title</label>
                                                 <input  type="text" name= "noteTitle" class="form-control" id="note-title" maxlength="20" required th:field="*{notetitle}">

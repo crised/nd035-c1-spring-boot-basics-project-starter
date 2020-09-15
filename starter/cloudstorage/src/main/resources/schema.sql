@@ -44,3 +44,6 @@ VALUES('crised','7CemDn6zw2J1sQ7kUX1piQ==', 'n97FCJAX2rWyq51+3oeANA==', 'cristia
 
 INSERT INTO FILES (filename, contenttype, filesize, userid, filedata)
 VALUES ('cat.txt', 'txt', '2', 1, '1122');
+
+INSERT INTO NOTES (notetitle, notedescription, userid)
+VALUES ('Important note', 'Take the trash can!', 1);
