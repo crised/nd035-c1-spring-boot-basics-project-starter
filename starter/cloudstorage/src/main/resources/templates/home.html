@@ -80,20 +80,8 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="note: ${notes}">
-<!--                                        <span th:text="|Welcome to our application, ${note.notetitle}!|">-->
-<!--                                        <span th:object=${note} th:text="|showNoteModal(*{noteid}, '*{notetitle}', '*{notedescription}')|">-->
-
                                         <td>
-                                            <!--onclick="showNoteModal()"-->
-                                            <!--th:onclick="'loadContent(\''+ ${data.path} +'\')'"-->
-
-<!--                                            <button type="button" class="btn btn-success" th:object="${note}" th:onclick="'showNoteModal(\''+ *{noteid} + '\' + \'' + *{noteid} + '\')'">Edit</button>-->
-<!--                                            <button type="button" class="btn btn-success" th:object="${note}" th:onclick="'showNoteModal(\''+ *{noteid} + '\' + \'' + *{noteid} + '\')'">Edit</button>-->
-                                            <button type="button" class="btn btn-success" th:object="${note}" th:onclick="|showNoteModal(*{noteid}, '*{noteid}', '*{noteid}')|">Edit</button>
-<!--                                            <button type="button" class="btn btn-success" th:onclick="|showNoteModal('1, 2, 3')|">Edit</button>-->
-<!--
-                                            <button type="button" class="btn btn-success" th:onclick="|showNoteModal(${note.noteid} + ${note.notetitle})|">Edit</button>-->
-                                            <!--th:onclick="'javascript:dataSearchAjax1(\'' + ${result.getString('type')} +'\',\''+ ${result.getString('name')} + '\');'"-->
+                                            <button type="button" class="btn btn-success" th:object="${note}" th:data-id="*{noteid}" th:data-title="*{notetitle}" th:data-description="*{notedescription}" onclick="showNoteModal(this.getAttribute('data-id'), this.getAttribute('data-title'), this.getAttribute('data-description'));">Edit</button>
                                             <a class="btn btn-danger">Delete</a>
                                         </td>
                                         <th th:text="${note.notetitle}" scope="row">Example Note Title</th>
