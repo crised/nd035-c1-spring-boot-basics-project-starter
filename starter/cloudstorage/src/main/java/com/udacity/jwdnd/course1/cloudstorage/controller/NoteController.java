@@ -29,11 +29,12 @@ public class NoteController {
     }
 
     @PostMapping
-//    public String receiveNote(@RequestAttribute("note") Note note, Model model) {
     public String receiveNote(@ModelAttribute("noteForm") Note noteForm, Authentication authentication, Model model) {
         System.out.println("on post receiveNote");
-        noteService.addNote(noteForm.getNotetitle(), noteForm.getNotedescription(), authentication.getName());
-        return "home";
+        if (noteForm.getNoteid() == null)
+            noteService.addNote(noteForm, authentication.getName());
+        else noteService.updateNote(noteForm);
+        return "redirect:/home";
     }
 
 

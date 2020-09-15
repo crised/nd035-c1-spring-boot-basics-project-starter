@@ -18,14 +18,18 @@ public class NoteService {
         this.userService = userService;
     }
 
-    public boolean addNote(String title, String description, String username) {
+    public boolean addNote(Note note, String username) {
         User user = userService.getUser(username);
         if (user != null) {
-            Note note = new Note(title, description, user.getUserid());
-            noteMapper.insert(note);
+            noteMapper.insert(new Note(note.getNotetitle(), note.getNotedescription(), user.getUserid()));
             return true;
         }
         return false;
+    }
+
+    public boolean updateNote(Note note) {
+        noteMapper.update(note);
+        return true;
     }
 
     public List<Note> getNotes(String username) {
