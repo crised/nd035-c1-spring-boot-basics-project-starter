@@ -33,7 +33,6 @@ public class HomeController {
     public String homeView(@RequestParam(value = "tabid", required = false) String tabid,
                            @ModelAttribute("credentialForm") Credential credentialForm,
                            @ModelAttribute("noteForm") Note noteForm, Model model) {
-        model.addAttribute("error", fileService.getErrorMessage());
         return "home";
     }
 
@@ -52,5 +51,9 @@ public class HomeController {
         return credentialService.getCredentials(authentication.getName());
     }
 
+    @ModelAttribute("error")
+    public String getFileErrorMessage(){
+        return fileService.getErrorMessage();
+    }
 
 }
