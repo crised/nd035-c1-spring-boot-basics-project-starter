@@ -33,7 +33,10 @@ public class HomeController {
     }
 
     @GetMapping()
-    public String homeView(@ModelAttribute("credentialForm") Credential credentialForm, @ModelAttribute("noteForm") Note noteForm, Model model) {
+    public String homeView(@RequestParam(value = "tabid", required = false) String tabid,
+                           @ModelAttribute("credentialForm") Credential credentialForm,
+                           @ModelAttribute("noteForm") Note noteForm, Model model) {
+        System.out.println(tabid);
         return "home";
     }
 
