@@ -24,7 +24,6 @@ public class NoteController {
     @GetMapping
     public String getNote(@ModelAttribute("noteForm") Note noteForm, Authentication authentication, Model model) {
         List<Note> notes = noteService.getNotes(authentication.getName());
-        System.out.println("notes: " + notes.size());
         return "home";
     }
 
@@ -39,7 +38,6 @@ public class NoteController {
 
     @GetMapping(path = "/delete")
     public String delete(@RequestParam("noteid") String noteid) {
-        //http://localhost:8080/file/delete?fileId=1
         noteService.deleteNote(Integer.valueOf(noteid));
         return "redirect:/home";
     }

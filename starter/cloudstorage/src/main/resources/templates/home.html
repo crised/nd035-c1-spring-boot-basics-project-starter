@@ -29,7 +29,7 @@
                         <h5 th:text="${error}"th:if="${error}">Error</h5>
                     </div>
                     <div class="tab-pane fade show active" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
-                        <form action="#" enctype="multipart/form-data" th:action="@{/home}" method="POST">
+                        <form action="#" enctype="multipart/form-data" th:action="@{/file}" method="POST">
                             <div class="container">
                                 <div class="row" style="margin: 1em;">
                                     <div class="col-sm-2">
@@ -53,12 +53,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="file: ${files}">
+                                <tr th:each="file: ${files}" th:object="${file}">
                                     <td>
-                                        <a th:href="@{file/download?fileId=} + @{${file.fileId}}" target="_blank" class="btn btn-success">View</a>
-                                        <a th:href="@{file/delete?fileId=} + @{${file.fileId}}" class="btn btn-danger">Delete</a>
+                                        <a th:href="@{file/download?fileId=} + *{fileId}" target="_blank" class="btn btn-success">View</a>
+                                        <a th:href="@{file/delete?fileId=} + *{fileId}" class="btn btn-danger">Delete</a>
                                     </td>
-                                    <th th:text="${file.filename}" scope="row">ExampleFile.txt</th>
+                                    <th th:text="*{filename}" scope="row">ExampleFile.txt</th>
                                 </tr>
                                 </tbody>
                             </table>
@@ -79,13 +79,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="note: ${notes}">
+                                    <tr th:each="note: ${notes}" th:object="${note}">
                                         <td>
-                                            <button type="button" class="btn btn-success" th:object="${note}" th:data-id="*{noteid}" th:data-title="*{notetitle}" th:data-description="*{notedescription}" onclick="showNoteModal(this.getAttribute('data-id'), this.getAttribute('data-title'), this.getAttribute('data-description'));">Edit</button>
-                                            <a th:href="@{note/delete?noteid=} + @{${note.noteid}}" class="btn btn-danger">Delete</a>
+                                            <button type="button" class="btn btn-success" th:data-id="*{noteid}" th:data-title="*{notetitle}" th:data-description="*{notedescription}" onclick="showNoteModal(this.getAttribute('data-id'), this.getAttribute('data-title'), this.getAttribute('data-description'));">Edit</button>
+                                            <a th:href="@{note/delete?noteid=} + *{noteid}" class="btn btn-danger">Delete</a>
                                         </td>
-                                        <th th:text="${note.notetitle}" scope="row">Example Note Title</th>
-                                        <td th:text="${note.notedescription}">Example Note Description </td>
+                                        <th th:text="*{notetitle}" scope="row">Example Note Title</th>
+                                        <td th:text="*{notedescription}">Example Note Description </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -148,7 +148,7 @@
                                                  this.getAttribute('data-username'),
                                                   this.getAttribute('data-password'));">
                                             Edit</button>
-                                        <a th:href="@{credential/delete?credentialid=} + @{*{credentialid}}" class="btn btn-danger">Delete</a>
+                                        <a th:href="@{credential/delete?credentialid=} + *{credentialid}" class="btn btn-danger">Delete</a>
                                     </td>
                                     <th th:text="*{url}" scope="row">Example Credential URL</th>
                                     <td th:text="*{username}">Example Credential Username</td>

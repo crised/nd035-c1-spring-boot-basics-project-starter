@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.service;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.FileMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
+import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,8 +38,9 @@ public class FileService {
         return true;
     }
 
-    public List<File> listFilesByUserId(Integer userId) {
-        return fileMapper.getFilesFromUser(userId);
+    public List<File> listFilesByUserName(String username) {
+        User user = userService.getUser(username);
+        return fileMapper.getFilesFromUser(user.getUserid());
     }
 
     public File getFileByFileId(Integer fileId) {
@@ -47,7 +49,6 @@ public class FileService {
 
     public boolean deleteFileByFileId(Integer fileId) {
         if (fileMapper.deleteFile(fileId) == 1) return true;
-        System.out.println("Ouch!");
         return false;
     }
 

@@ -28,17 +28,18 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    @GetMapping()
-    public String getId(Integer param) {
-        System.out.println("here");
-        System.out.println(param);
-        return "home";
+    @PostMapping()
+    public String controlFileUpload(@RequestParam("fileUpload") MultipartFile fileUpload,
+                                    Authentication authentication,
+                                    Model model) {
+        model.addAttribute("error", null);
+        if (!fileService.handleFileUpload(fileUpload, authentication.getName()))
+            model.addAttribute("error", "Couldn't upload the file, maybe it's duplicated?");
+        return "redirect:/home";
     }
 
     @GetMapping(path = "/download")
     public ResponseEntity<Resource> download(@RequestParam("fileId") String fileId) throws IOException {
-        // Accepting url of type: http://localhost:8080/file/download?fileId=001
-        System.out.println(fileId);
         File file = fileService.getFileByFileId(Integer.valueOf(fileId));
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getFilename());
@@ -52,7 +53,6 @@ public class FileController {
 
     @GetMapping(path = "/delete")
     public String delete(@RequestParam("fileId") String fileId) {
-        //http://localhost:8080/file/delete?fileId=1
         fileService.deleteFileByFileId(Integer.valueOf(fileId));
         return "redirect:/home";
     }

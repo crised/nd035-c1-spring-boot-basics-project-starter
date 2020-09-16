@@ -30,14 +30,12 @@ public class SignupController {
         if (!userService.isUsernameAvailable(user.getUsername())) {
             signupError = "The username already exists.";
         }
-
         if (signupError == null) {
             int rowsAdded = userService.createUser(user);
             if (rowsAdded < 0) {
                 signupError = "There was an error signing you up. Please try again.";
             }
         }
-
         if (signupError == null) {
             model.addAttribute("signupSuccess", true);
         } else {
@@ -45,5 +43,4 @@ public class SignupController {
         }
         return "signup";
     }
-
 }

@@ -23,7 +23,6 @@ public class AuthenticationService implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
         String username = authentication.getName();
         String password = authentication.getCredentials().toString(); // plain password
         User user = userMapper.getUser(username);
