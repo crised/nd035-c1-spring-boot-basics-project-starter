@@ -23,10 +23,10 @@ public class CredentialController {
     public String receiveCredential(@ModelAttribute("credentialForm") Credential credentialForm,
                                     Authentication authentication,
                                     Model model) {
-        System.out.println("on post receiveCredential");
+        String username = authentication.getName();
         if (credentialForm.getCredentialid() == null)
-            credentialService.addCredential(credentialForm, authentication.getName());
-//        else credentialService.updateNote(noteForm);
+            credentialService.addCredential(credentialForm, username);
+        else credentialService.editCredential(credentialForm, username);
         return "redirect:/home";
     }
 

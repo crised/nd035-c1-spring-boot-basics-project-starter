@@ -42,4 +42,14 @@ public class CredentialService {
         return false;
     }
 
+    public boolean editCredential(Credential credential, String username) {
+        User user = userService.getUser(username);
+        String credentialKey = credentialMapper.getKeyByCredentialKey(credential.getCredentialid());
+        if (user != null) {
+            credential.setPassword(encryptionService.encryptValue(credential.getPlainpassword(), credentialKey));
+            credentialMapper.update(credential);
+        }
+        return true;
+    }
+
 }
