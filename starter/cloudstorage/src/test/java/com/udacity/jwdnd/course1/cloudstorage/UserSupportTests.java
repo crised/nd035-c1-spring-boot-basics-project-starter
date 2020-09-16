@@ -8,12 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class CloudStorageApplicationTests {
+class UserSupportTests {
 
 	@LocalServerPort
 	private int port;
 
-	private WebDriver driver;
+	private static WebDriver driver;
 
 	@BeforeAll
 	static void beforeAll() {
@@ -23,6 +23,7 @@ class CloudStorageApplicationTests {
 	@BeforeEach
 	public void beforeEach() {
 		this.driver = new ChromeDriver();
+		driver.get("http://localhost:" + port + "/home");
 	}
 
 	@AfterEach
@@ -30,6 +31,13 @@ class CloudStorageApplicationTests {
 		if (this.driver != null) {
 			driver.quit();
 		}
+	}
+
+	@AfterAll
+	public static void afterAll() throws InterruptedException {
+		Thread.sleep(3000);
+		System.out.println("Final URL: " + driver.getCurrentUrl());
+		driver.quit();
 	}
 
 	@Test
