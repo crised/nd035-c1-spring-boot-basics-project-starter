@@ -140,7 +140,14 @@
                                 <tbody>
                                 <tr th:each="credential: ${credentials}" th:object="${credential}">
                                     <td>
-                                        <button type="button" class="btn btn-success">Edit</button>
+                                        <button type="button" class="btn btn-success" th:object="${credential}"
+                                                th:data-id="*{credentialid}" th:data-url="*{url}"
+                                                th:data-username="*{username}" th:data-password="*{plainpassword}"
+                                                onclick="showCredentialModal(this.getAttribute('data-id'),
+                                                 this.getAttribute('data-url'),
+                                                 this.getAttribute('data-username'),
+                                                  this.getAttribute('data-password'));">
+                                            Edit</button>
                                         <a class="btn btn-danger">Delete</a>
                                     </td>
                                     <th th:text="*{url}" scope="row">Example Credential URL</th>

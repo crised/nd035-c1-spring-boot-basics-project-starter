@@ -63,7 +63,6 @@ public class HomeController {
     @ModelAttribute("credentials")
     public List<Credential> allCredentialsFromUser(Authentication authentication) {
         return credentialService.getCredentials(authentication.getName());
-
     }
 
 
