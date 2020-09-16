@@ -8,6 +8,11 @@ import java.util.List;
 @Mapper
 public interface FileMapper {
 
+    @Insert("INSERT INTO FILES (filename, contenttype, filesize, userid, filedata) " +
+            "VALUES (#{filename}, #{contenttype}, #{filesize}, #{userId}, #{filedata})")
+    @Options(useGeneratedKeys = true, keyProperty = "fileId")
+    int addFile(File file);
+
     @Select("SELECT * FROM FILES WHERE userid = #{userId}")
     List<File> getFilesFromUser(Integer userId);
 
@@ -17,13 +22,6 @@ public interface FileMapper {
     @Select("SELECT * FROM FILES WHERE filename = #{filename}")
     File getFileByName(String filename);
 
-
-    @Insert("INSERT INTO FILES (filename, contenttype, filesize, userid, filedata) " +
-            "VALUES (#{filename}, #{contenttype}, #{filesize}, #{userId}, #{filedata})")
-    @Options(useGeneratedKeys = true, keyProperty = "fileId")
-    int addFile(File file);
-
     @Delete("DELETE FROM FILES WHERE fileId = #{fileId}")
     int deleteFile(Integer fileId);
-
 }
