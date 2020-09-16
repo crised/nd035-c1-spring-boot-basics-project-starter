@@ -52,4 +52,9 @@ public class CredentialService {
         return true;
     }
 
+    public boolean removeCredential(Integer credentialId) {
+        if (credentialMapper.deleteNote(credentialId) == 1) return true;
+        return false;
+    }
+
 }
