@@ -37,5 +37,12 @@ public class NoteController {
         return "redirect:/home";
     }
 
+    @GetMapping(path = "/delete")
+    public String delete(@RequestParam("noteid") String noteid) {
+        //http://localhost:8080/file/delete?fileId=1
+        noteService.deleteNote(Integer.valueOf(noteid));
+        return "redirect:/home";
+    }
+
 
 }

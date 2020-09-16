@@ -38,4 +38,10 @@ public class NoteService {
         return noteMapper.getAllNotesFromUser(user.getUserid());
     }
 
+    public boolean deleteNote(Integer noteid) {
+        if (noteMapper.deleteNote(noteid) == 1) return true;
+        return false;
+    }
+
+
 }
