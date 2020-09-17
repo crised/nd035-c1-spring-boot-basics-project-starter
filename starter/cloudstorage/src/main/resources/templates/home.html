@@ -139,7 +139,7 @@
                                 <tbody>
                                 <tr th:each="credential: ${credentials}" th:object="${credential}">
                                     <td>
-                                        <button type="button" class="btn btn-success" th:object="${credential}"
+                                        <button id="credentialEditButtonTable" type="button" class="btn btn-success" th:object="${credential}"
                                                 th:data-id="*{credentialid}" th:data-url="*{url}"
                                                 th:data-username="*{username}" th:data-password="*{plainpassword}"
                                                 onclick="showCredentialModal(this.getAttribute('data-id'),
@@ -147,11 +147,11 @@
                                                  this.getAttribute('data-username'),
                                                   this.getAttribute('data-password'));">
                                             Edit</button>
-                                        <a th:href="@{credential/delete?credentialid=} + *{credentialid}" class="btn btn-danger">Delete</a>
+                                        <a id="credentialDeleteButtonTable" th:href="@{credential/delete?credentialid=} + *{credentialid}" class="btn btn-danger">Delete</a>
                                     </td>
-                                    <th th:text="*{url}" scope="row">Example Credential URL</th>
-                                    <td th:text="*{username}">Example Credential Username</td>
-                                    <td th:text="*{password}">Example Credential Password</td>
+                                    <th id="credentialUrlTable" th:text="*{url}" scope="row">Example Credential URL</th>
+                                    <td id="credentialUsernameTable" th:text="*{username}">Example Credential Username</td>
+                                    <td id="credentialPasswordTable" th:text="*{password}">Example Credential Password</td>
                                 </tr>
                                 </tbody>
                             </table>

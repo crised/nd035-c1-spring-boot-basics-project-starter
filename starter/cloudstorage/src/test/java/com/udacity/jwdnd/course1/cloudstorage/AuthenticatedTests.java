@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
+import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
@@ -124,6 +125,11 @@ public class AuthenticatedTests {
     public void createCredential() {
         createCredentialMethod();
         HomePage homePage = new HomePage(driver);
+        Credential credential = homePage.getCredentialByUrl(credentialURL);
+        assertNotNull(credential);
+        assertEquals(credentialURL, credential.getUrl());
+        assertTrue(credential.getPassword().length()>password.length()); // Test password encrypted
+
 
     }
 

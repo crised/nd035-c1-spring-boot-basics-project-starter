@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
+import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,6 +48,21 @@ public class HomePage {
 
     @FindBy(id = "noteDeleteButtonTable")
     private List<WebElement> noteDeleteButtonTable;
+
+    @FindBy(id = "credentialEditButtonTable")
+    private List<WebElement> credentialEditButtonTable;
+
+    @FindBy(id = "credentialDeleteButtonTable")
+    private List<WebElement> credentialDeleteButtonTable;
+
+    @FindBy(id = "credentialUrlTable")
+    private List<WebElement> credentialUrlTable;
+
+    @FindBy(id = "credentialUsernameTable")
+    private List<WebElement> credentialUsernameTable;
+
+    @FindBy(id = "credentialPasswordTable")
+    private List<WebElement> credentialPasswordTable;
 
     @FindBy(id = "note-title")
     private WebElement noteTitleInput;
@@ -186,7 +202,6 @@ public class HomePage {
     }
 
     public boolean createCredential(String url, String username, String plainPassword) {
-
         try {
             Thread.sleep(500);
             credentialsTab.click();
@@ -202,9 +217,29 @@ public class HomePage {
             credentialsTab.click();
             Thread.sleep(500);
             return true;
-
         } catch (InterruptedException e) {
             return false;
         }
     }
+
+    public Credential getCredentialByUrl(String givenUrl) {
+        try {
+            Thread.sleep(500);
+            for (int i = 0; i < credentialUrlTable.size(); i++) {
+                String url = credentialUrlTable.get(i).getText();
+                if (url.equals(givenUrl)) {
+                    Credential credential = new Credential();
+                    credential.setUrl(credentialUrlTable.get(i).getText());
+                    credential.setUsername(credentialUsernameTable.get(i).getText());
+                    credential.setPassword(credentialPasswordTable.get(i).getText());
+                    return credential;
+                }
+            }
+        } catch (InterruptedException e) {
+            return null;
+        }
+        return null;
+    }
+
+
 }
