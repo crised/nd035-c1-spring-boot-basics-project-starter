@@ -136,9 +136,9 @@ public class HomePage {
     public Note getNoteByTitle(String title) {
         try {
             Thread.sleep(500);
-            int n = noteTitleTable.size();
-            System.out.println(n);
-            for (int i = 0; i < n; i++) {
+            notesTab.click();
+            Thread.sleep(500);
+            for (int i = 0; i < noteTitleTable.size(); i++) {
                 String noteTitle = noteTitleTable.get(i).getText();
                 System.out.println("Note text: " + noteTitle);
                 if (noteTitle.equals(title)) {
@@ -156,9 +156,9 @@ public class HomePage {
     public boolean editNoteByTitle(String title, String newTitle) {
         try {
             Thread.sleep(500);
-            int n = noteTitleTable.size();
-            System.out.println(n);
-            for (int i = 0; i < n; i++) {
+            notesTab.click();
+            Thread.sleep(500);
+            for (int i = 0; i < noteTitleTable.size(); i++) {
                 String noteTitle = noteTitleTable.get(i).getText();
                 System.out.println("Note text: " + noteTitle);
                 if (noteTitle.equals(title)) {
@@ -182,6 +182,8 @@ public class HomePage {
 
     public boolean deleteNoteByTitle(String title) {
         try {
+            Thread.sleep(500);
+            notesTab.click();
             Thread.sleep(500);
             for (int i = 0; i < noteTitleTable.size(); i++) {
                 String noteTitle = noteTitleTable.get(i).getText();
@@ -224,6 +226,8 @@ public class HomePage {
     public Credential getCredentialByUrl(String givenUrl) {
         try {
             Thread.sleep(500);
+            credentialTab.click();
+            Thread.sleep(500);
             for (int i = 0; i < credentialUrlTable.size(); i++) {
                 String url = credentialUrlTable.get(i).getText();
                 if (url.equals(givenUrl)) {
@@ -242,6 +246,8 @@ public class HomePage {
 
     public boolean editCredentialByUrl(String givenUrl, String newUserName) {
         try {
+            Thread.sleep(500);
+            credentialTab.click();
             Thread.sleep(500);
             for (int i = 0; i < credentialUrlTable.size(); i++) {
                 String url = credentialUrlTable.get(i).getText();
@@ -266,6 +272,8 @@ public class HomePage {
 
     public boolean deleteCredentialByUrl(String givenUrl) {
         try {
+            Thread.sleep(500);
+            credentialTab.click();
             Thread.sleep(500);
             for (int i = 0; i < credentialUrlTable.size(); i++) {
                 String url = credentialUrlTable.get(i).getText();

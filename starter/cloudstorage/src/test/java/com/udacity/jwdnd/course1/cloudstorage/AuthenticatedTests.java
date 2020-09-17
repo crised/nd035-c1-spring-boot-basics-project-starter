@@ -44,7 +44,7 @@ public class AuthenticatedTests {
 
     @AfterAll
     public static void afterAll() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         System.out.println("Final URL: " + driver.getCurrentUrl());
         driver.quit();
     }
