@@ -26,19 +26,6 @@ class UserSupportTests {
         driver = new ChromeDriver();
     }
 
-//    @BeforeEach
-//    public void beforeEach() {
-//        this.driver = new ChromeDriver();
-//        driver.get("http://localhost:" + port + "/home");
-//    }
-//
-//    @AfterEach
-//    public void afterEach() {
-//        if (this.driver != null) {
-//            driver.quit();
-//        }
-//    }
-
     @AfterAll
     public static void afterAll() throws InterruptedException {
         Thread.sleep(3000);
