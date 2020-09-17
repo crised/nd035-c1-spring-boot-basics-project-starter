@@ -264,6 +264,25 @@ public class HomePage {
         return false;
     }
 
+    public boolean deleteCredentialByUrl(String givenUrl) {
+        try {
+            Thread.sleep(500);
+            for (int i = 0; i < credentialUrlTable.size(); i++) {
+                String url = credentialUrlTable.get(i).getText();
+                if (url.equals(givenUrl)) {
+                    credentialDeleteButtonTable.get(i).click();
+                    Thread.sleep(500);
+                    credentialTab.click();
+                    Thread.sleep(500);
+                    return true;
+                }
+            }
+        } catch (InterruptedException e) {
+            return false;
+        }
+        return false;
+    }
+
 
 
 }

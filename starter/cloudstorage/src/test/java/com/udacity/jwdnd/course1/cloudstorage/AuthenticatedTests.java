@@ -142,9 +142,15 @@ public class AuthenticatedTests {
         Credential credential = homePage.getCredentialByUrl(credentialURL);
         assertNotNull(credential);
         assertEquals(credentialUsername, credential.getUsername());
+    }
 
-
-
+    @Test
+    public void deleteCredential(){
+        createCredentialMethod();
+        HomePage homePage = new HomePage(driver);
+        assertTrue(homePage.deleteCredentialByUrl(credentialURL));
+        homePage = new HomePage(driver);
+        assertNull(homePage.getCredentialByUrl(credentialURL));
 
     }
 
