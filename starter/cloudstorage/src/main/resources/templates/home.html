@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">
-                        <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" onclick="showNoteModal()">
+                        <button id="addNoteButton" style="margin: 0.25em;" type="button" class="btn btn-info float-right" onclick="showNoteModal()">
                             + Add a New Note
                         </button>
 
@@ -83,7 +83,7 @@
                                             <button type="button" class="btn btn-success" th:data-id="*{noteid}" th:data-title="*{notetitle}" th:data-description="*{notedescription}" onclick="showNoteModal(this.getAttribute('data-id'), this.getAttribute('data-title'), this.getAttribute('data-description'));">Edit</button>
                                             <a th:href="@{note/delete?noteid=} + *{noteid}" class="btn btn-danger">Delete</a>
                                         </td>
-                                        <th th:text="*{notetitle}" scope="row">Example Note Title</th>
+                                        <th id="noteTitleTable" th:text="*{notetitle}" scope="row">Example Note Title</th>
                                         <td th:text="*{notedescription}">Example Note Description </td>
                                     </tr>
                                 </tbody>
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="$('#noteSubmit').click();">Save changes</button>
+                                        <button id="noteSaveChanges" type="button" class="btn btn-primary" onclick="$('#noteSubmit').click();">Save changes</button>
                                     </div>
                                 </div>
                             </div>
