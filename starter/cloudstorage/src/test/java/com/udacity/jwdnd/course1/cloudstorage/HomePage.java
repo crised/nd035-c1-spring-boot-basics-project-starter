@@ -26,7 +26,7 @@ public class HomePage {
     private WebElement notesTab;
 
     @FindBy(id = "nav-credentials-tab")
-    private WebElement credentialsTab;
+    private WebElement credentialTab;
 
     @FindBy(id = "uploadButton")
     private WebElement uploadButton;
@@ -178,7 +178,6 @@ public class HomePage {
             return false;
         }
         return false;
-
     }
 
     public boolean deleteNoteByTitle(String title) {
@@ -204,7 +203,7 @@ public class HomePage {
     public boolean createCredential(String url, String username, String plainPassword) {
         try {
             Thread.sleep(500);
-            credentialsTab.click();
+            credentialTab.click();
             Thread.sleep(500);
             addCredentialButton.click();
             Thread.sleep(500);
@@ -214,7 +213,7 @@ public class HomePage {
             wait.until(ExpectedConditions.elementToBeClickable(credentialSaveChanges));
             credentialSaveChanges.click();
             Thread.sleep(500);
-            credentialsTab.click();
+            credentialTab.click();
             Thread.sleep(500);
             return true;
         } catch (InterruptedException e) {
@@ -240,6 +239,31 @@ public class HomePage {
         }
         return null;
     }
+
+    public boolean editCredentialByUrl(String givenUrl, String newUserName) {
+        try {
+            Thread.sleep(500);
+            for (int i = 0; i < credentialUrlTable.size(); i++) {
+                String url = credentialUrlTable.get(i).getText();
+                if (url.equals(givenUrl)) {
+                    credentialEditButtonTable.get(i).click();
+                    Thread.sleep(500);
+                    credentialUserNameInput.clear();
+                    credentialUserNameInput.sendKeys(newUserName);
+                    wait.until(ExpectedConditions.elementToBeClickable(credentialSaveChanges));
+                    credentialSaveChanges.click();
+                    Thread.sleep(500);
+                    credentialTab.click();
+                    Thread.sleep(500);
+                    return true;
+                }
+            }
+        } catch (InterruptedException e) {
+            return false;
+        }
+        return false;
+    }
+
 
 
 }

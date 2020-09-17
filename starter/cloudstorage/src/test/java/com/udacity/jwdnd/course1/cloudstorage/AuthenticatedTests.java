@@ -28,6 +28,7 @@ public class AuthenticatedTests {
     private static final String credentialURL = "superDuperDrive.com";
 
     private static String noteTitle = "new note";
+    private static String credentialUsername = "crised";
 
 
     private static boolean isSigned;
@@ -84,7 +85,7 @@ public class AuthenticatedTests {
         driver.get("http://localhost:" + this.port + "/home");
         assertTrue(driver.getCurrentUrl().contains("home")); // authenticated.
         HomePage homePage = new HomePage(driver);
-        assertTrue(homePage.createCredential(credentialURL, username, password));
+        assertTrue(homePage.createCredential(credentialURL, credentialUsername, password));
         this.isCredentialCreated = true;
 
     }
@@ -129,6 +130,20 @@ public class AuthenticatedTests {
         assertNotNull(credential);
         assertEquals(credentialURL, credential.getUrl());
         assertTrue(credential.getPassword().length()>password.length()); // Test password encrypted
+    }
+
+    @Test
+    public void editCredentials(){
+        createCredentialMethod();
+        HomePage homePage = new HomePage(driver);
+        credentialUsername = "new_username";
+        assertTrue(homePage.editCredentialByUrl(credentialURL, credentialUsername));
+        homePage = new HomePage(driver);
+        Credential credential = homePage.getCredentialByUrl(credentialURL);
+        assertNotNull(credential);
+        assertEquals(credentialUsername, credential.getUsername());
+
+
 
 
     }
