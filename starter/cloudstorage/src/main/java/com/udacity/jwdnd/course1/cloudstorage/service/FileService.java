@@ -15,6 +15,7 @@ public class FileService {
     private FileMapper fileMapper;
     private UserService userService;
     private String errorMessage;
+    private boolean success;
 
     public FileService(FileMapper fileMapper, UserService userService) {
         this.fileMapper = fileMapper;
@@ -22,8 +23,9 @@ public class FileService {
     }
 
     public boolean handleFileUpload(MultipartFile fileUpload, String username) {
+        this.success = false;
         String filename = fileUpload.getOriginalFilename();
-        if(filename.isEmpty()) return false;
+        if (filename.isEmpty()) return false;
         if (fileMapper.getFileByName(filename) != null) return false;
         Integer userId = userService.getUserIdByUserName(username);
         if (userId < 0) return false;
@@ -37,6 +39,7 @@ public class FileService {
         File file = new File(filename, fileUpload.getContentType(),
                 String.valueOf(fileArray.length), userId, fileArray);
         fileMapper.addFile(file);
+        this.success = true;
         return true;
     }
 
@@ -50,7 +53,11 @@ public class FileService {
     }
 
     public boolean deleteFileByFileId(Integer fileId) {
-        if (fileMapper.deleteFile(fileId) == 1) return true;
+        this.success = false;
+        if (fileMapper.deleteFile(fileId) == 1) {
+            this.success = true;
+            return true;
+        }
         return false;
     }
 
@@ -60,5 +67,9 @@ public class FileService {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public boolean isSuccess() {
+        return success;
     }
 }

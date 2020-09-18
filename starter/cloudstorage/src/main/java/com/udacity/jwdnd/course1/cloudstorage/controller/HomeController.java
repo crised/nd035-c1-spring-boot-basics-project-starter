@@ -56,4 +56,7 @@ public class HomeController {
         return fileService.getErrorMessage();
     }
 
+    @ModelAttribute("success")
+    public boolean getSuccessState() {return fileService.isSuccess();}
+
 }
