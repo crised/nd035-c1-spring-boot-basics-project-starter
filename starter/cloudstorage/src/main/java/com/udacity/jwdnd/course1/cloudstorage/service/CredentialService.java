@@ -14,6 +14,8 @@ public class CredentialService {
     private EncryptionService encryptionService;
     private UserService userService;
 
+    private boolean success;
+
     public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService, UserService userService) {
         this.credentialMapper = credentialMapper;
         this.encryptionService = encryptionService;
@@ -31,30 +33,41 @@ public class CredentialService {
     }
 
     public boolean addCredential(Credential credential, String username) {
+        success = false;
         User user = userService.getUser(username);
         if (user != null) {
             credential.setUserid(user.getUserid());
             credential.generateKey();
             credential.setPassword(encryptionService.encryptValue(credential.getPlainpassword(), credential.getKey()));
             credentialMapper.insert(credential);
+            success = true;
             return true;
         }
         return false;
     }
 
     public boolean editCredential(Credential credential, String username) {
+        success = false;
         User user = userService.getUser(username);
         String credentialKey = credentialMapper.getKeyByCredentialKey(credential.getCredentialid());
         if (user != null) {
             credential.setPassword(encryptionService.encryptValue(credential.getPlainpassword(), credentialKey));
             credentialMapper.update(credential);
+            success = false;
         }
         return true;
     }
 
     public boolean removeCredential(Integer credentialId) {
-        if (credentialMapper.deleteNote(credentialId) == 1) return true;
+        success = false;
+        if (credentialMapper.deleteNote(credentialId) == 1) {
+            success = true;
+            return true;
+        }
         return false;
     }
 
+    public boolean isSuccess() {
+        return success;
+    }
 }

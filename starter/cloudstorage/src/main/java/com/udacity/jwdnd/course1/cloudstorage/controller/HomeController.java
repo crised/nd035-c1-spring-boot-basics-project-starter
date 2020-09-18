@@ -52,11 +52,13 @@ public class HomeController {
     }
 
     @ModelAttribute("error")
-    public String getFileErrorMessage(){
+    public String getFileErrorMessage() {
         return fileService.getErrorMessage();
     }
 
     @ModelAttribute("success")
-    public boolean getSuccessState() {return fileService.isSuccess();}
+    public boolean getSuccessState() {
+        return fileService.isSuccess() || noteService.isSuccess() || credentialService.isSuccess();
+    }
 
 }

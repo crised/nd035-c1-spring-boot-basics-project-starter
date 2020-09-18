@@ -13,22 +13,28 @@ public class NoteService {
     private NoteMapper noteMapper;
     private UserService userService;
 
+    private boolean success;
+
     public NoteService(NoteMapper noteMapper, UserService userService) {
         this.noteMapper = noteMapper;
         this.userService = userService;
     }
 
     public boolean addNote(Note note, String username) {
+        success = false;
         User user = userService.getUser(username);
         if (user != null) {
             noteMapper.insert(new Note(note.getNotetitle(), note.getNotedescription(), user.getUserid()));
+            success = true;
             return true;
         }
         return false;
     }
 
     public boolean updateNote(Note note) {
+        success = false;
         noteMapper.update(note);
+        success = true;
         return true;
     }
 
@@ -39,9 +45,15 @@ public class NoteService {
     }
 
     public boolean deleteNote(Integer noteid) {
-        if (noteMapper.deleteNote(noteid) == 1) return true;
+        success = false;
+        if (noteMapper.deleteNote(noteid) == 1) {
+            success = true;
+            return true;
+        }
         return false;
     }
 
-
+    public boolean isSuccess() {
+        return success;
+    }
 }
