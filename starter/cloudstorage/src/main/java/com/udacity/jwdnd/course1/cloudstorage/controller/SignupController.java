@@ -37,7 +37,7 @@ public class SignupController {
             }
         }
         if (signupError == null) {
-            model.addAttribute("signupSuccess", true);
+            return "redirect:/home";
         } else {
             model.addAttribute("signupError", signupError);
         }
